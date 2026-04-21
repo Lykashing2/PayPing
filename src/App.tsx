@@ -84,8 +84,8 @@ export default function App() {
   const [isMounted, setIsMounted] = useState(false);
   
   // Settings State
-  const [bakongId, setBakongId] = useState(() => localStorage.getItem('bakongId') || "phearun_ly@aba");
-  const [merchantName, setMerchantName] = useState(() => localStorage.getItem('merchantName') || "PayPing Demo Store");
+  const [bakongId, setBakongId] = useState(() => localStorage.getItem('bakongId') || "");
+  const [merchantName, setMerchantName] = useState(() => localStorage.getItem('merchantName') || "My Payment Terminal");
   const [bakongToken, setBakongToken] = useState(() => localStorage.getItem('bakongToken') || "");
   const [directSync, setDirectSync] = useState(() => localStorage.getItem('directSync') === 'true');
   const [soundEnabled, setSoundEnabled] = useState(() => localStorage.getItem('soundEnabled') !== 'false');
