@@ -1,0 +1,23 @@
+{
+  "entities": {
+    "Transaction": {
+      "title": "Transaction",
+      "description": "A payment transaction from Bakong.",
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number", "description": "The amount received." },
+        "currency": { "type": "string", "description": "USD or KHR." },
+        "senderName": { "type": "string", "description": "Name of the sender." },
+        "timestamp": { "type": "string", "format": "date-time", "description": "When the transaction occurred." },
+        "externalId": { "type": "string", "description": "Bakong transaction hash or ID." }
+      },
+      "required": ["amount", "currency", "senderName", "timestamp", "externalId"]
+    }
+  },
+  "firestore": {
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Collection of recorded transactions."
+    }
+  }
+}

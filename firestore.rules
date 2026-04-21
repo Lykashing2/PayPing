@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidTransaction(data) {
+      return data.amount is number && 
+             data.currency is string && data.currency.size() <= 3 &&
+             data.senderName is string && data.senderName.size() <= 100 &&
+             data.timestamp is timestamp &&
+             data.externalId is string && data.externalId.size() <= 128;
+    }
+
+    match /transactions/{transactionId} {
+      // For MVP, we allow public read (or authenticated read) 
+      // In a real app, you'd filter by merchantId
+      allow list: if true; // Public for display in demo
+      allow get: if true;
+      
+      // Only the backend (or authorized person) should write
+      // For this demo, we'll keep it simple but "secured" by a secret in practice
+      // Here we allow create if it matches the schema
+      allow create: if isSignedIn() && isValidTransaction(request.resource.data);
+    }
+  }
+}

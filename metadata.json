@@ -1,0 +1,6 @@
+{
+  "name": "PayPing",
+  "description": "A Bakong Payment Notification PWA for real-time transaction tracking and alerts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
